@@ -1,19 +1,27 @@
 import java.net.*;
 
 public class GameServer {
+    private static int port = 1728;
+    private static ServerSocket listener;
+    private static Socket connection;
+
     public static void main(String[] args) {
-        int port = 1728;
-        ServerSocket listener;
-        Socket connection;
-
-        try {
+        try{
             listener = new ServerSocket(port);
-            System.out.println("Word Drift server started on port " + listener.getLocalPort());
+            System.out.println("Los in Transition server started on port " + listener.getLocalPort());
 
-            connection = listener.accept();
-            listener.close();
-            System.out.println("Client connected: " + connection.getInetAddress());
+            while (true){
+                GameRoom room = new GameRoom();
+                System.out.println("Waiting for players...");
+                connection = listener.accept();
 
+                room.addPlayer(connection);
+                System.out.println("Players Connected: " + room.getPlayerCount());
+
+                System.out.println("Starting game with " + room.getPlayerCount() + " players");
+
+            }
+ 
         } catch (Exception e) {
             System.out.println("ERROR: Connection could not be established.");
             return;
