@@ -13,12 +13,16 @@ public class GameServer {
             while (true){
                 GameRoom room = new GameRoom();
                 System.out.println("Waiting for players...");
-                connection = listener.accept();
 
+            //This while loop connects both players (more players overtime) at the same time
+            while (room.getPlayerCount() < 2){
+                connection = listener.accept();
                 room.addPlayer(connection);
                 System.out.println("Players Connected: " + room.getPlayerCount());
-
+            }
                 System.out.println("Starting game with " + room.getPlayerCount() + " players");
+
+                new Thread(() -> room.game()).start();
 
             }
  
