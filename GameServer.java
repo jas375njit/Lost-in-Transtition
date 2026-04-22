@@ -8,7 +8,7 @@ public class GameServer {
     public static void main(String[] args) {
         try{
             listener = new ServerSocket(port);
-            System.out.println("Los in Transition server started on port " + listener.getLocalPort());
+            System.out.println("Los in Transition server started on port " + port);
 
             while (true){
                 GameRoom room = new GameRoom();
@@ -23,7 +23,6 @@ public class GameServer {
                 System.out.println("Starting game with " + room.getPlayerCount() + " players");
 
                 new Thread(() -> room.game()).start();
-
             }
  
         } catch (Exception e) {
