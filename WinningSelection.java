@@ -16,15 +16,17 @@ public class WinningSelection {
                 String data = sc.useDelimiter("\\A").next().toLowerCase();
 
                 String search = "\"word\":\"" + guess.toLowerCase() + "\",\"score\":";
-                
+
                 if (data.contains(search)) {
                     int start = data.indexOf(search) + search.length();
-                    int end = data.indexOf(",", start);
+                    int commaEnd = data.indexOf(",", start);
+                    int braceEnd = data.indexOf("}", start);
+                    int end = (commaEnd == -1) ? braceEnd : (braceEnd == -1) ? commaEnd : Math.min(commaEnd, braceEnd);
                     return Integer.parseInt(data.substring(start, end).trim());
                 }
             }
         } catch (Exception e) {
-            System.out.println("API Error: ");
+            System.out.println("API Error: " + e.getMessage());
         }
 
         return 0; 
