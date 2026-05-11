@@ -21,7 +21,7 @@ public class GameServer {
                 room.addPlayer(connection, firstIn);
                 System.out.println("Players Connected: " + room.getPlayerCount());
 
-                //This while loop connects both players (more players overtime) at the same time
+                //This while loop connects both players (more players overtime) at the same tim
                 while (room.getPlayerCount() < totalPlayers) {
                     connection = listener.accept();
                     BufferedReader r = new BufferedReader(new InputStreamReader(connection.getInputStream()));
