@@ -11,10 +11,9 @@ public class WinningSelection {
         try {
             //Fetches the api into the application
             URL url = new URL("https://api.datamuse.com/words?ml=" + word.replace(" ", "+"));
-            
+
             try (Scanner sc = new Scanner(url.openStream())) {
                 String data = sc.useDelimiter("\\A").next().toLowerCase();
-
                 String search = "\"word\":\"" + guess.toLowerCase() + "\",\"score\":";
 
                 if (data.contains(search)) {
@@ -29,6 +28,6 @@ public class WinningSelection {
             System.out.println("API Error: " + e.getMessage());
         }
 
-        return 0; 
+        return 0;
     }
 }
